@@ -1,0 +1,29 @@
+{
+"manifest_version": 3,
+  "name": "Auto-correct extension",
+  "version": "1.0",
+  "description": "An extension that automatically accepts the first suggestion for the closest misspelled word",
+  "permissions": ["activeTab"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["typo.js", "content.js"]
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["dictionaries/*"],
+        "matches": ["<all_urls>"]
+  }],
+  "commands": {
+    "auto-correct": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Auto-correct the first suggestion for the closest misspelled word"
+    }
+  }
+}
